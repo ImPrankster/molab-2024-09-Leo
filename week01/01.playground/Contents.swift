@@ -13,6 +13,9 @@ let charSelectionPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()1234567890-="
 func render() {
     let generated = wordShape.map { $0 == "#" ? String(charSelectionPool.randomElement() ?? " ") : String($0) } .joined()
     print(generated)
+    print("\n")
 }
 
-render()
+for i in 1...9 {
+    render()
+}
