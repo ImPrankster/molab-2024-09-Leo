@@ -51,7 +51,8 @@ let TEXT_POOL = "明月几时有把酒问青天不知天上宫阙今夕是何年
     All I can wish is that we may have long life,
     That a thousand miles apart we may share her beauty.
 
-    （Robert Kotewell & Norman Smith）
+    (Robert Kotewell & Norman Smith)
+    [From](https://www.en84.com/dianji/ci/201609/00000298.html)
 */
 
 let renderer = UIGraphicsImageRenderer(size: CGSize(width: SIZE, height: SIZE))
