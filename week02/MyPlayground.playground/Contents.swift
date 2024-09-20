@@ -72,13 +72,9 @@ var image = renderer.image { (context) in
         print(ang2)
         for i in 1...100 {
             let ang1 = Double(i) / Double(100) * Double(2) * Double.pi
-            var xPos = sin(ang1*r1)
-            xPos = xPos * 400 * cos(ang2*r2)
-            xPos = xPos + Double(SIZE) / 2
+            var xPos = sin(ang1*r1) * 400 * cos(ang2*r2) + Double(SIZE) / 2
             
-            var yPos = cos(ang1*r3)
-            yPos = yPos * 400 * sin(ang2*r4)
-            yPos = yPos + Double(SIZE) / 2
+            var yPos = cos(ang1*r3) * 400 * sin(ang2*r4) + Double(SIZE) / 2
             
             let string = NSAttributedString(string: String(TEXT_POOL.randomElement()!))
             string.draw(at: CGPoint(x:xPos,y:yPos))
