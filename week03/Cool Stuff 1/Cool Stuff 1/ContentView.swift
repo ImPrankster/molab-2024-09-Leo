@@ -16,7 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            CoolImage(r1: $r1, r2: $r2, r3: $r3, r4: $r4)
+            CoolImage(r1: r1, r2: r2, r3: r3, r4: r4)
             Button(action: {
                 r1 = Double.random(in: -1...1)
                 r2 = Double.random(in: -1...1)

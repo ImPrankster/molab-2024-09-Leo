@@ -39,10 +39,10 @@ func renderImage(size: CGSize, r1: Double, r2: Double, r3:Double, r4:Double) -> 
 }
 
 struct CoolImage: View {
-    @Binding var r1: Double
-    @Binding var r2: Double
-    @Binding var r3: Double
-    @Binding var r4: Double
+     var r1: Double
+     var r2: Double
+     var r3: Double
+     var r4: Double
     
     var body: some View {
         Image(uiImage: renderImage(size: CGSize(width: 1024, height: 1024), r1: r1, r2: r2, r3: r3, r4: r4))
