@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var r2: Double = Double.random(in: -1...1)
     @State var r3: Double = Double.random(in: -1...1)
     @State var r4: Double = Double.random(in: -1...1)
-    
+
     var body: some View {
         VStack {
             CoolImage(r1: r1, r2: r2, r3: r3, r4: r4)
@@ -28,7 +28,8 @@ struct ContentView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-            }        }
+            }
+        }
         .padding()
     }
 }
