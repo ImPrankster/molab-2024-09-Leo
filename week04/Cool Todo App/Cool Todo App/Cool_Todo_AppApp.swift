@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Cool_Todo_AppApp: App {
+    @StateObject var audioPlayer = AudioPlayer()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(audioPlayer)
         }
     }
 }

@@ -8,7 +8,10 @@ import SwiftUI
 
 struct TodoListView: View {
     @Binding var todoArr: [String]
+    @Binding var deletedTodoArr: [String]
 
+    @EnvironmentObject var audioPlayer: AudioPlayer
+    
     var body: some View {
         List {
             ForEach(
@@ -17,6 +20,8 @@ struct TodoListView: View {
                     Button(
                         action: {
                             todoArr.remove(at: index)
+                            deletedTodoArr.append(item)
+                            audioPlayer.playDelSound()
                         },
                         label: {
                             // Button label
@@ -27,8 +32,4 @@ struct TodoListView: View {
         .listStyle(.plain)
         .background(Color.clear)
     }
-}
-
-#Preview {
-    ContentView()
 }
