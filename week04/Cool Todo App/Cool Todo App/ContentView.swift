@@ -13,26 +13,36 @@ struct ContentView: View {
     @State private var todoArr: [String] = []
     @State private var deletedTodoArr: [String] = []
 
+    @AppStorage("todo-arr") private var storedTodoArr: String = "[]"
+    @AppStorage("deleted-todos") private var storedDeletedArr: String = "[]"
+
     @EnvironmentObject var audioPlayer: AudioPlayer
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationView {
             VStack {
                 HStack {
                     Text("Cool Todo App").bold().font(
-                        .system(.largeTitle, design: .serif))
+                        .system(.largeTitle, design: .rounded))
                     NavigationLink(
                         "History",
                         destination:
                             DeletedTodoListView(todoArr: deletedTodoArr)
-                    ).buttonStyle(.bordered)
+                    ).buttonStyle(.bordered).font(
+                        .system(
+                            .headline, design: .rounded
+                        ))
                 }
                 HStack {
                     InputBoxView(inputText: $currentTodo)
                     Button(
                         action: {
-                            todoArr.append(currentTodo)
-                            audioPlayer.playAddSound()
+                            if currentTodo.lengthOfBytes(using: .utf8) > 0 {
+                                todoArr.append(currentTodo)
+                                audioPlayer.playAddSound()
+                                currentTodo = ""
+                            }
                         },
                         label: {
                             Text("Add")
@@ -42,6 +52,20 @@ struct ContentView: View {
                 TodoListView(todoArr: $todoArr, deletedTodoArr: $deletedTodoArr)
             }
             .padding()
+        }.onAppear(
+            perform: {
+                todoArr = decodeArray(from: storedTodoArr)
+                deletedTodoArr = decodeArray(from: storedDeletedArr)
+            }
+        ).onChange(
+            of: scenePhase,
+            initial: false
+        ) {
+            (newPhase, _) in
+            if newPhase == .background {
+                storedTodoArr = encodeArray(todoArr)
+                storedDeletedArr = encodeArray(deletedTodoArr)
+            }
         }
     }
 }
