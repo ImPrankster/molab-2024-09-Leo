@@ -61,11 +61,8 @@ struct ContentView: View {
             of: scenePhase,
             initial: false
         ) {
-            (newPhase, _) in
-            if newPhase == .background {
-                storedTodoArr = encodeArray(todoArr)
-                storedDeletedArr = encodeArray(deletedTodoArr)
-            }
+            storedTodoArr = encodeArray(todoArr)
+            storedDeletedArr = encodeArray(deletedTodoArr)
         }
     }
 }
