@@ -9,12 +9,27 @@ import SwiftUI
 
 struct InputBoxView: View {
     @Binding var inputText: String
+    @Binding var todoArr: [String]
+
+    @EnvironmentObject var audioPlayer: AudioPlayer
 
     var body: some View {
-        VStack {
-            TextField("Enter text here", text: $inputText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+        HStack {
+            TextField("What to do next", text: $inputText).textFieldStyle(
+                .roundedBorder)
+
+            Button(
+                action: {
+                    if inputText.lengthOfBytes(using: .utf8) > 0 {
+                        todoArr.append(inputText)
+                        inputText = ""
+                        audioPlayer.playAddSound()
+                    }
+                },
+                label: {
+                    Text("Add")
+                }
+            ).buttonStyle(.borderedProminent)
         }
     }
 }

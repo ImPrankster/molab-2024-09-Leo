@@ -34,21 +34,7 @@ struct ContentView: View {
                             .headline, design: .rounded
                         ))
                 }
-                HStack {
-                    InputBoxView(inputText: $currentTodo)
-                    Button(
-                        action: {
-                            if currentTodo.lengthOfBytes(using: .utf8) > 0 {
-                                todoArr.append(currentTodo)
-                                audioPlayer.playAddSound()
-                                currentTodo = ""
-                            }
-                        },
-                        label: {
-                            Text("Add")
-                        }
-                    ).buttonStyle(.borderedProminent)
-                }
+                InputBoxView(inputText: $currentTodo, todoArr: $todoArr)
                 TodoListView(todoArr: $todoArr, deletedTodoArr: $deletedTodoArr)
             }
             .padding()

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 func encodeArray(_ array: [String]) -> String {
     if let data = try? JSONEncoder().encode(array),
@@ -26,14 +25,3 @@ func decodeArray(from jsonString: String) -> [String] {
     return []
 }
 
-extension Color {
-    // Generate a random translucent color
-    static func randomColor() -> Color {
-        return Color(
-            red: Double.random(in: 0...1),
-            green: Double.random(in: 0...1),
-            blue: Double.random(in: 0...1),
-            opacity: 0.5 // Set opacity to make it translucent
-        )
-    }
-}
