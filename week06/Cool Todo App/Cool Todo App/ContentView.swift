@@ -9,14 +9,9 @@ import AVFoundation
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentTodo = ""
-    @State private var todoArr: [String] = []
-    @State private var deletedTodoArr: [String] = []
-
-    @AppStorage("todo-arr") private var storedTodoArr: String = "[]"
-    @AppStorage("deleted-todos") private var storedDeletedArr: String = "[]"
 
     @EnvironmentObject var audioPlayer: AudioPlayer
+    @EnvironmentObject var todoStore: TodoStore
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -25,35 +20,28 @@ struct ContentView: View {
                 HStack {
                     Text("Cool Todo App").bold().font(
                         .system(.largeTitle, design: .rounded))
-                    NavigationLink(
-                        "History",
-                        destination:
-                            DeletedTodoListView(todoArr: deletedTodoArr)
-                    ).buttonStyle(.bordered).font(
-                        .system(
-                            .headline, design: .rounded
-                        ))
                 }
-                InputBoxView(inputText: $currentTodo, todoArr: $todoArr)
-                TodoListView(todoArr: $todoArr, deletedTodoArr: $deletedTodoArr)
+                InputBoxView()
+                TodoListView()
             }
             .padding()
         }.onAppear(
             perform: {
-                todoArr = decodeArray(from: storedTodoArr)
-                deletedTodoArr = decodeArray(from: storedDeletedArr)
+                todoStore.load()
             }
         ).onChange(
             of: scenePhase,
             initial: false
         ) {
-            storedTodoArr = encodeArray(todoArr)
-            storedDeletedArr = encodeArray(deletedTodoArr)
+            todoStore.save()
         }
     }
 }
 
 #Preview {
     @StateObject @Previewable var audioPlayer = AudioPlayer()
-    ContentView().environmentObject(audioPlayer)
+    @StateObject @Previewable var todoStore = TodoStore(
+        todoArr: [], deletedTodoArr: []
+    )
+    ContentView().environmentObject(audioPlayer).environmentObject(todoStore)
 }

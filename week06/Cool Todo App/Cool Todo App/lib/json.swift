@@ -7,7 +7,7 @@
 
 import Foundation
 
-func encodeArray(_ array: [String]) -> String {
+func encodeTodoArray(_ array: [todo]) -> String {
     if let data = try? JSONEncoder().encode(array),
         let jsonString = String(data: data, encoding: .utf8)
     {
@@ -16,9 +16,9 @@ func encodeArray(_ array: [String]) -> String {
     return "[]"
 }
 
-func decodeArray(from jsonString: String) -> [String] {
+func decodeTodoArray(from jsonString: String) -> [todo] {
     if let data = jsonString.data(using: .utf8),
-        let decodedArray = try? JSONDecoder().decode([String].self, from: data)
+        let decodedArray = try? JSONDecoder().decode([todo].self, from: data)
     {
         return decodedArray
     }

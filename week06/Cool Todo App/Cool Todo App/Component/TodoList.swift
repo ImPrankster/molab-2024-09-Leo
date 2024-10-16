@@ -7,52 +7,56 @@
 import SwiftUI
 
 struct TodoListView: View {
-    @Binding var todoArr: [String]
-    @Binding var deletedTodoArr: [String]
-
+    @EnvironmentObject var todoStore: TodoStore
     @EnvironmentObject var audioPlayer: AudioPlayer
 
     var body: some View {
-        List {
-
-            ForEach(
-                Array(todoArr.enumerated()), id: \.offset,
-                content: { index, item in
-                    Section {
-                        Button(
-                            action: {
-                            },
-                            label: {
-                                Text(item).font(
-                                    .system(size: 25, design: .rounded)
-                                ).fontWeight(.bold)
-                            }
-                        )
-
-                    }
-                    .swipeActions {
-                        Button("Delete") {
-                            todoArr.remove(at: index)
-                            deletedTodoArr.append(item)
-                            audioPlayer.playDelSound()
+        List(todoStore.todoArr, id: \.id) { item in
+            Section {
+                NavigationLink {
+                    TodoDetailView(
+                        todo: $todoStore.todoArr[
+                            todoStore.todoArr.firstIndex(where: {
+                                $0.id == item.id
+                            }) ?? 0])
+                } label: {
+                    Text(item.name).font(
+                        .system(size: 25, design: .rounded)
+                    ).fontWeight(.bold)
+                }
+            }
+            .swipeActions {
+                Button(
+                    action: {
+                        if let index = todoStore.todoArr.firstIndex(where: {
+                            $0.id == item.id
+                        }) {
+                            todoStore.todoArr.remove(at: index)
                         }
-                        .tint(
-                            .red
-                        )
-                        .clipShape(
-                            RoundedRectangle(
-                                cornerRadius: 25.0, style: .continuous))
+                        todoStore.deletedTodoArr.append(item)
+                        audioPlayer.playDelSound()
+                    },
+                    label: {
+                        Label("Finish", systemImage: "checkmark")
                     }
-                    .listRowInsets(
-                        .init(
-                            top: 0,
-                            leading: 40,
-                            bottom: 0,
-                            trailing: 40
-                        )
-                    )
-                    .listRowBackground(Color.randomColor())
-                })
+                )
+                .tint(
+                    .green
+                )
+                .clipShape(
+                    RoundedRectangle(
+                        cornerRadius: 25.0, style: .continuous))
+            }
+            .listRowInsets(
+                .init(
+                    top: 0,
+                    leading: 40,
+                    bottom: 0,
+                    trailing: 40
+                )
+            )
+            .listRowBackground(Color(hex: item.colorHex))
+
         }
         .scrollContentBackground(.hidden)
         .listStyle(.automatic)

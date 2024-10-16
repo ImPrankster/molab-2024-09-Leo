@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct InputBoxView: View {
-    @Binding var inputText: String
-    @Binding var todoArr: [String]
+    @State private var inputText = ""
 
     @EnvironmentObject var audioPlayer: AudioPlayer
+    @EnvironmentObject var todoStore: TodoStore
 
     var body: some View {
         HStack {
@@ -21,7 +21,12 @@ struct InputBoxView: View {
             Button(
                 action: {
                     if inputText.lengthOfBytes(using: .utf8) > 0 {
-                        todoArr.append(inputText)
+                        todoStore.todoArr.append(
+                            todo(
+                                id: UUID(), name: inputText,
+                                colorHex: Color.randomColor().toHex()
+                                    ?? "#000000", description: "")
+                        )
                         inputText = ""
                         audioPlayer.playAddSound()
                     }
