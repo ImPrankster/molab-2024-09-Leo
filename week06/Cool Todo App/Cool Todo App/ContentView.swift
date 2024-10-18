@@ -9,22 +9,26 @@ import AVFoundation
 import SwiftUI
 
 struct ContentView: View {
-
     @EnvironmentObject var audioPlayer: AudioPlayer
     @EnvironmentObject var todoStore: TodoStore
+
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    Text("Cool Todo App").bold().font(
-                        .system(.largeTitle, design: .rounded))
+        NavigationStack {
+            TabView {
+                Tab("Home", systemImage: "pencil.line") {
+                    VStack {
+                        Text("Cool Todo App").bold().font(
+                            .system(.largeTitle, design: .rounded))
+                        InputBoxView()
+                        TodoListView()
+                    }.padding()
                 }
-                InputBoxView()
-                TodoListView()
+                Tab("Deleted", systemImage: "trash") {
+                    DeletedTodoListView()
+                }
             }
-            .padding()
         }.onAppear(
             perform: {
                 todoStore.load()
@@ -40,8 +44,6 @@ struct ContentView: View {
 
 #Preview {
     @StateObject @Previewable var audioPlayer = AudioPlayer()
-    @StateObject @Previewable var todoStore = TodoStore(
-        todoArr: [], deletedTodoArr: []
-    )
+    @StateObject @Previewable var todoStore = TodoStore()
     ContentView().environmentObject(audioPlayer).environmentObject(todoStore)
 }

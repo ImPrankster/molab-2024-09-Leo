@@ -59,7 +59,7 @@ struct TodoListView: View {
 
         }
         .scrollContentBackground(.hidden)
-        .listStyle(.automatic)
+        .listStyle(.sidebar)
         .listSectionSpacing(8)
         .contentMargins(.all, 0, for: .scrollContent).environment(
             \.defaultMinListRowHeight, 80)

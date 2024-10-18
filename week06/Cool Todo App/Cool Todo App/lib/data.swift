@@ -16,13 +16,10 @@ struct todo: Codable, Hashable, Identifiable {
 class TodoStore: ObservableObject {
     @AppStorage("todo-arr") private var storedTodoArr: String = "[]"
     @AppStorage("deleted-todos") private var storedDeletedArr: String = "[]"
-    @Published var todoArr: [todo]
-    @Published var deletedTodoArr: [todo]
+    @Published var todoArr: [todo] = []
+    @Published var deletedTodoArr: [todo] = []
 
-    init(todoArr: [todo], deletedTodoArr: [todo]) {
-        self.todoArr = todoArr
-        self.deletedTodoArr = deletedTodoArr
-    }
+    init() {}
 
     func load() {
         todoArr = decodeTodoArray(from: storedTodoArr)
