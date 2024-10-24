@@ -10,33 +10,9 @@
 		7B1F6D692CC2B49200E101E0 /* Time Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Time Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7B1F6D7D2CC2B64F00E101E0 /* Exceptions for "Time Machine" folder in "Time Machine" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Component/PhotoPicker.swift,
-			);
-			target = 7B1F6D682CC2B49200E101E0 /* Time Machine */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		7B1F6D7E2CC2B64F00E101E0 /* Exceptions for "Time Machine" folder in "Copy Bundle Resources" phase from "Time Machine" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 7B1F6D672CC2B49200E101E0 /* Resources */;
-			membershipExceptions = (
-				Component/PhotoPicker.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		7B1F6D6B2CC2B49200E101E0 /* Time Machine */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7B1F6D7D2CC2B64F00E101E0 /* Exceptions for "Time Machine" folder in "Time Machine" target */,
-				7B1F6D7E2CC2B64F00E101E0 /* Exceptions for "Time Machine" folder in "Copy Bundle Resources" phase from "Time Machine" target */,
-			);
 			path = "Time Machine";
 			sourceTree = "<group>";
 		};
