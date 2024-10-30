@@ -33,26 +33,19 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject private var model = ContentViewModel()
+    @EnvironmentObject private var model: ContentViewModel
 
-  var body: some View {
-    ZStack {
-      FrameView(image: model.frame)
-        .edgesIgnoringSafeArea(.all)
-
-      ErrorView(error: model.error)
-
-      ControlView(
-        comicSelected: $model.comicFilter,
-        monoSelected: $model.monoFilter,
-        crystalSelected: $model.crystalFilter,
-        otherSelected: $model.otherFilter)
+    var body: some View {
+        ZStack {
+            FrameView(image: model.frame)
+                .edgesIgnoringSafeArea(.all)
+            ErrorView(error: model.error)
+            ControlView()
+        }
     }
-  }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+    @StateObject @Previewable var model = ContentViewModel()
+    ContentView().environmentObject(model)
 }

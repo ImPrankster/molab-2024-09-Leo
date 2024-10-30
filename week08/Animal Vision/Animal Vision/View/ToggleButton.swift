@@ -33,31 +33,29 @@
 import SwiftUI
 
 struct ToggleButton: View {
-  @Binding var selected: Bool
+    let action: () -> Void
+    var selected: Bool
+    var label: String
 
-  var label: String
-
-  var body: some View {
-    Button(action: {
-      selected.toggle()
-    }, label: {
-      Text(label)
-    })
-    .padding(.vertical, 10)
-    .padding(.horizontal)
-    .foregroundColor(selected ? .white : .black)
-    .background(selected ? Color.blue : .white)
-    .animation(.easeInOut, value: 0.25)
-    .cornerRadius(10)
-  }
+    var body: some View {
+        Button(
+            action: {
+                action()
+            },
+            label: {
+                Image(systemName: selected ? label + ".fill" : label)
+            }
+        )
+        .foregroundColor(selected ? .blue : .black)
+        .animation(.easeInOut, value: 0.25)
+    }
 }
 
 struct ToggleButton_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      Color.black
-
-      ToggleButton(selected: .constant(false), label: "Toggle")
+    static var previews: some View {
+        ZStack {
+            Color.black
+            ToggleButton(action: {}, selected: false, label: "Toggle")
+        }
     }
-  }
 }

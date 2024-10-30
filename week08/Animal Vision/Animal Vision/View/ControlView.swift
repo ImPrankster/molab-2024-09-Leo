@@ -33,36 +33,28 @@
 import SwiftUI
 
 struct ControlView: View {
-  @Binding var comicSelected: Bool
-  @Binding var monoSelected: Bool
-  @Binding var crystalSelected: Bool
-  @Binding var otherSelected: Bool
+    @EnvironmentObject private var model: ContentViewModel
 
-  var body: some View {
-    VStack {
-      Spacer()
-
-      HStack(spacing: 12) {
-        ToggleButton(selected: $comicSelected, label: "Comic")
-        ToggleButton(selected: $monoSelected, label: "Mono")
-        ToggleButton(selected: $crystalSelected, label: "Crystal")
-        ToggleButton(selected: $otherSelected, label: "Other")
-      }
+    var body: some View {
+        HStack(spacing: 24) {
+            ToggleButton(
+                action: {
+                    model.currentFilter = .dog
+                }, selected: model.currentFilter == .dog, label: "dog")
+            ToggleButton(
+                action: {
+                    model.currentFilter = .cat
+                }, selected: model.currentFilter == .cat, label: "cat")
+            ToggleButton(
+                action: {
+                    model.currentFilter = .fish
+                }, selected: model.currentFilter == .fish, label: "fish")
+            ToggleButton(
+                action: {
+                    model.currentFilter = .bird
+                }, selected: model.currentFilter == .bird, label: "bird")
+        }.padding().background(
+            .ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16.0)
+        )
     }
-  }
-}
-
-struct ControlView_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      Color.black
-        .edgesIgnoringSafeArea(.all)
-
-      ControlView(
-        comicSelected: .constant(false),
-        monoSelected: .constant(true),
-        crystalSelected: .constant(true),
-        otherSelected: .constant(true))
-    }
-  }
 }

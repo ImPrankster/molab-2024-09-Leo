@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Animal_VisionApp: App {
+    @StateObject var model = ContentViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(model)
         }
     }
 }
