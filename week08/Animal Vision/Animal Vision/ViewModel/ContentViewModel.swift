@@ -33,6 +33,7 @@
 import CoreImage
 
 enum FilterOption {
+    case human
     case dog
     case cat
     case fish
@@ -42,7 +43,7 @@ enum FilterOption {
 class ContentViewModel: ObservableObject {
     @Published var error: Error?
     @Published var frame: CGImage?
-    
+
     var currentFilter: FilterOption = .dog
 
     private let context = CIContext()
@@ -55,6 +56,7 @@ class ContentViewModel: ObservableObject {
     }
 
     func setupSubscriptions() {
+        let filter = AnimalVisionFilters()
         // swiftlint:disable:next array_init
         cameraManager.$error
             .receive(on: RunLoop.main)
@@ -69,14 +71,16 @@ class ContentViewModel: ObservableObject {
                 }
 
                 var ciImage = CIImage(cgImage: image)
-                
+
                 switch self.currentFilter {
+                case .human:
+                    ciImage = ciImage
                 case .dog:
-                    ciImage = ciImage
+                    ciImage = filter.applyDogVisionFilter(image: ciImage) ?? ciImage
                 case .cat:
-                    ciImage = ciImage
+                    ciImage = filter.applyCatVisionFilter(image: ciImage) ?? ciImage
                 case .fish:
-                    ciImage = ciImage
+                    ciImage = filter.applyFishVisionFilter(image: ciImage) ?? ciImage
                 case .bird:
                     ciImage = ciImage
                 }

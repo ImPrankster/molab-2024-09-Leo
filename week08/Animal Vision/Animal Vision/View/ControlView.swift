@@ -39,6 +39,10 @@ struct ControlView: View {
         HStack(spacing: 24) {
             ToggleButton(
                 action: {
+                    model.currentFilter = .human
+                }, selected: model.currentFilter == .human, label: "person")
+            ToggleButton(
+                action: {
                     model.currentFilter = .dog
                 }, selected: model.currentFilter == .dog, label: "dog")
             ToggleButton(
@@ -49,10 +53,6 @@ struct ControlView: View {
                 action: {
                     model.currentFilter = .fish
                 }, selected: model.currentFilter == .fish, label: "fish")
-            ToggleButton(
-                action: {
-                    model.currentFilter = .bird
-                }, selected: model.currentFilter == .bird, label: "bird")
         }.padding().background(
             .ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16.0)
         )
