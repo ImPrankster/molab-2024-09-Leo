@@ -16,8 +16,8 @@ class AnimalVisionFilters {
         
         // Reduce red sensitivity, enhance blues
         colorMatrix.rVector = CIVector(x: 0.3, y: 0.0, z: 0.0, w: 0)
-        colorMatrix.gVector = CIVector(x: 0.4, y: 0.9, z: 0.0, w: 0)
-        colorMatrix.bVector = CIVector(x: 0.3, y: 0.1, z: 1.0, w: 0)
+        colorMatrix.gVector = CIVector(x: 0.4, y: 0.0, z: 0.0, w: 0)
+        colorMatrix.bVector = CIVector(x: 0.3, y: 0.03, z: 1.0, w: 0)
         colorMatrix.aVector = CIVector(x: 0.0, y: 0.0, z: 0.0, w: 1.0)
         colorMatrix.biasVector = CIVector(x: 0.0, y: 0.0, z: 0.0, w: 0.0)
         
