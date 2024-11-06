@@ -24,7 +24,10 @@ struct ProfileForm: View {
             Section {
                 HStack {
                     Spacer()
-                    EditableCircularProfileImage(viewModel: viewModel)
+                    VStack {
+                        EditableCircularProfileImage(viewModel: viewModel)
+                        ProfileMsg(imageState: viewModel.imageState)
+                    }
                     Spacer()
                 }
             }
@@ -39,13 +42,33 @@ struct ProfileForm: View {
                     text: $viewModel.lastName,
                     prompt: Text("Last Name"))
             }
-            Section {
-                TextField(
-                    "About Me",
-                    text: $viewModel.aboutMe,
-                    prompt: Text("About Me"))
+            Section(
+                header: Text("Something Coo about Yourself")
+            ) {
+                TextEditor(
+                    text: $viewModel.aboutMe
+                )
             }
         }
-        .navigationTitle("Account Profile")
+        .navigationTitle("Pigeon-file")
+    }
+}
+
+struct ProfileMsg: View {
+    let imageState: ProfileModel.ImageState
+
+    var body: some View {
+        switch imageState {
+        case .failure(let error):
+            Text(
+                "Important: we don't welcome other birds or species. Coo."
+            ).font(.headline)
+        case .empty:
+            EmptyView()
+        case .loading(_):
+            EmptyView()
+        case .success(_):
+            EmptyView()
+        }
     }
 }

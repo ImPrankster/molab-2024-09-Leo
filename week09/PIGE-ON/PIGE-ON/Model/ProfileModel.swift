@@ -12,6 +12,8 @@ import SwiftUI
 @MainActor
 class ProfileModel: ObservableObject {
 
+    let pigeonDetector = ObjectDetector()
+
     // MARK: - Profile Details
 
     @Published var firstName: String = ""
@@ -33,6 +35,7 @@ class ProfileModel: ObservableObject {
 
     struct ProfileImage: Transferable {
         let image: Image
+        let uIImage: UIImage
 
         static var transferRepresentation: some TransferRepresentation {
             DataRepresentation(importedContentType: .image) { data in
@@ -40,7 +43,7 @@ class ProfileModel: ObservableObject {
                     throw TransferError.importFailed
                 }
                 let image = Image(uiImage: uiImage)
-                return ProfileImage(image: image)
+                return ProfileImage(image: image, uIImage: uiImage)
             }
         }
     }
@@ -72,6 +75,7 @@ class ProfileModel: ObservableObject {
                 }
                 switch result {
                 case .success(let profileImage?):
+                    self.checkImageValid(from: profileImage.uIImage)
                     self.imageState = .success(profileImage.image)
                 case .success(nil):
                     self.imageState = .empty
@@ -79,6 +83,25 @@ class ProfileModel: ObservableObject {
                     self.imageState = .failure(error)
                 }
             }
+        }
+    }
+
+    private func checkImageValid(from image: UIImage) {
+        do {
+            try pigeonDetector.makePredictions(
+                for: image,
+                completionHandler: {
+                    p in
+                    //                    if !(p?.first.debugDescription
+                    //                        .localizedCaseInsensitiveContains("pigeon") ?? false)
+                    //                    {
+                    //                        self.imageState = .failure(AppError.NotPigeonError)
+                    //                    }
+                    print(p?.first ?? "")
+                }
+            )
+        } catch {
+            print("Can not make Image prediction")
         }
     }
 }
