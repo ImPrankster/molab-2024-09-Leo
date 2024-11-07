@@ -75,8 +75,8 @@ class ProfileModel: ObservableObject {
                 }
                 switch result {
                 case .success(let profileImage?):
-                    self.checkImageValid(from: profileImage.uIImage)
                     self.imageState = .success(profileImage.image)
+                    self.checkImageValid(from: profileImage.uIImage)
                 case .success(nil):
                     self.imageState = .empty
                 case .failure(let error):
@@ -92,15 +92,28 @@ class ProfileModel: ObservableObject {
                 for: image,
                 completionHandler: {
                     p in
-                    //                    if !(p?.first.debugDescription
-                    //                        .localizedCaseInsensitiveContains("pigeon") ?? false)
-                    //                    {
-                    //                        self.imageState = .failure(AppError.NotPigeonError)
-                    //                    }
-                    print(p?.first ?? "")
+                    if let prediction = p, !prediction.isEmpty {
+                        print(prediction.description)
+                        let max = prediction.reduce(prediction[0]) {
+                            max, p in
+                            if p.confidence > max.confidence {
+                                return p
+                            } else {
+                                return max
+                            }
+                        }
+
+                        if max.confidence < 0.5 {
+                            self.imageState = .failure(AppError.NotPigeonError)
+                        }
+                    } else {
+                        print("No object found")
+                        self.imageState = .failure(AppError.NotPigeonError)
+                    }
                 }
             )
         } catch {
+            self.imageState = .failure(AppError.UnableToPredict)
             print("Can not make Image prediction")
         }
     }

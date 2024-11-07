@@ -21,8 +21,9 @@ struct ProfileImage: View {
             Image("DefaultProfile")
                 .resizable()
                 .offset(y: 8)
+                .clipShape(Circle())
         case .failure:
-            Image(systemName: "exclamationmark.triangle.fill")
+            Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 40))
                 .foregroundColor(.white)
         }
@@ -35,7 +36,6 @@ struct CircularProfileImage: View {
     var body: some View {
         ProfileImage(imageState: imageState)
             .scaledToFill()
-            .clipShape(Circle())
             .frame(width: 100, height: 100)
             .background {
                 Circle().fill(

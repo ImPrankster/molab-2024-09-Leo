@@ -61,7 +61,7 @@ struct ProfileMsg: View {
         switch imageState {
         case .failure(let error):
             Text(
-                "Important: we don't welcome other birds or species. Coo."
+                error.localizedDescription
             ).font(.headline)
         case .empty:
             EmptyView()
