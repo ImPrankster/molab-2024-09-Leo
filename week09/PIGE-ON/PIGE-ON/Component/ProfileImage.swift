@@ -15,6 +15,7 @@ struct ProfileImage: View {
         switch imageState {
         case .success(let image):
             image.resizable()
+                .clipShape(Circle())
         case .loading:
             ProgressView()
         case .empty:

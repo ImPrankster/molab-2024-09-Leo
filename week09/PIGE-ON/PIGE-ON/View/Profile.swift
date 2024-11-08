@@ -50,7 +50,7 @@ struct ProfileForm: View {
                 )
             }
         }
-        .navigationTitle("Pigeon-file")
+        .navigationTitle("Profile")
     }
 }
 
