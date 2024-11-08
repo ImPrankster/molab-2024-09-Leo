@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7B0C932A2CDE696C00557FAB /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 7B0C93292CDE696C00557FAB /* Auth */; };
+		7B0C932C2CDE696C00557FAB /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 7B0C932B2CDE696C00557FAB /* Storage */; };
+		7B0C932E2CDE696C00557FAB /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7B0C932D2CDE696C00557FAB /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7B9930B42CD52EA500102FE2 /* PIGE-ON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIGE-ON.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0C932C2CDE696C00557FAB /* Storage in Frameworks */,
+				7B0C932A2CDE696C00557FAB /* Auth in Frameworks */,
+				7B0C932E2CDE696C00557FAB /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,9 @@
 			);
 			name = "PIGE-ON";
 			packageProductDependencies = (
+				7B0C93292CDE696C00557FAB /* Auth */,
+				7B0C932B2CDE696C00557FAB /* Storage */,
+				7B0C932D2CDE696C00557FAB /* Supabase */,
 			);
 			productName = "PIGE-ON";
 			productReference = 7B9930B42CD52EA500102FE2 /* PIGE-ON.app */;
@@ -94,6 +106,9 @@
 			);
 			mainGroup = 7B9930AB2CD52EA500102FE2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7B0C93282CDE696C00557FAB /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7B9930B52CD52EA500102FE2 /* Products */;
 			projectDirPath = "";
@@ -326,6 +341,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B0C93282CDE696C00557FAB /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B0C93292CDE696C00557FAB /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B0C93282CDE696C00557FAB /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		7B0C932B2CDE696C00557FAB /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B0C93282CDE696C00557FAB /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		7B0C932D2CDE696C00557FAB /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B0C93282CDE696C00557FAB /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B9930AC2CD52EA500102FE2 /* Project object */;
 }
